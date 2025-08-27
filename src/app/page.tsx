@@ -81,7 +81,7 @@ export default function LoginPage() {
           transition: "all 0.3s ease",
         }}
       >
-        {/* Theme Toggle Button */}
+        {/* Theme Toggle Buttn */}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <IconButton onClick={() => setDarkMode(!darkMode)}>
             {darkMode ? (
