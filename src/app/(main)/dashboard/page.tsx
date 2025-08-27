@@ -96,7 +96,7 @@ function AboutContent() {
         variant="h4"
         gutterBottom
         align="center"
-        sx={{ fontWeight: "bold", color: "white" }}
+        sx={{ fontWeight: "bold", color: "Bule" }}
       >
         About Page
       </Typography>
