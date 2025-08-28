@@ -7,6 +7,8 @@ import { useState } from "react";
 import { IconButton } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+// 👇 lucide-react import
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [, setAuthToken] = useAtom(authTokenAtom);
@@ -21,6 +23,10 @@ export default function LoginPage() {
 
   // 👇 Theme state
   const [darkMode, setDarkMode] = useState(false);
+
+  // 👇 Password toggle state
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +87,7 @@ export default function LoginPage() {
           transition: "all 0.3s ease",
         }}
       >
-        {/* Theme Toggle Buttn */}
+        {/* Theme Toggle Button */}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <IconButton onClick={() => setDarkMode(!darkMode)}>
             {darkMode ? (
@@ -139,11 +145,11 @@ export default function LoginPage() {
         </div>
 
         {/* Password */}
-        <div style={{ marginBottom: "1rem" }}>
+        <div style={{ marginBottom: "1rem", position: "relative" }}>
           <label htmlFor="password">Password</label>
           <input
             id="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
@@ -155,18 +161,35 @@ export default function LoginPage() {
               fontSize: "1rem",
               backgroundColor: darkMode ? "#3c3c3c" : "white",
               color: darkMode ? "white" : "black",
+              paddingRight: "40px", // space for eye icon
             }}
             disabled={isLoading}
           />
+          {/* Eye Toggle */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "35px",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              color: darkMode ? "white" : "black",
+            }}
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
         </div>
 
         {/* Confirm Password */}
         {isSignup && (
-          <div style={{ marginBottom: "1.5rem" }}>
+          <div style={{ marginBottom: "1.5rem", position: "relative" }}>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               id="confirmPassword"
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm your password"
@@ -178,9 +201,26 @@ export default function LoginPage() {
                 fontSize: "1rem",
                 backgroundColor: darkMode ? "#3c3c3c" : "white",
                 color: darkMode ? "white" : "black",
+                paddingRight: "40px",
               }}
               disabled={isLoading}
             />
+            {/* Eye Toggle for Confirm Password */}
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "35px",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                color: darkMode ? "white" : "black",
+              }}
+            >
+              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
           </div>
         )}
 
